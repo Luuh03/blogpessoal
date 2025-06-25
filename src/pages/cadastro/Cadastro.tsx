@@ -15,7 +15,7 @@ function Cadastro() {
   const [confirmaSenha, setConfirmaSenha] = useState<string>("")
 
   const [usuario, setUsuario] = useState<Usuario>({
-    id: null,
+    id: undefined,
     nome: '',
     usuario: '',
     senha: '',
@@ -23,7 +23,7 @@ function Cadastro() {
   })
 
   useEffect(() => {
-    if(usuario.id !== null) {
+    if (usuario.id !== null) {
       retornar()
     }
   }, [usuario])
@@ -46,19 +46,19 @@ function Cadastro() {
   async function cadastrarNovoUsuario(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
-    if(confirmaSenha === usuario.senha && usuario.senha.length >= 8) {
+    if (confirmaSenha === usuario.senha && usuario.senha.length >= 8) {
 
       setIsLoading(true)
 
       try {
         await cadastrarUsuario('/usuarios/cadastrar', usuario, setUsuario)
         alert('Usuário cadastrado com sucesso!')
-      } catch(error) {
+      } catch (error) {
         alert('Erro ao cadastrar usuário!')
       }
     } else {
       alert('Dados do usuário inconsistentes! Verifique as informações do cadastro.')
-      setUsuario({...usuario, senha: ''})
+      setUsuario({ ...usuario, senha: '' })
       setConfirmaSenha('')
     }
 
@@ -108,7 +108,7 @@ function Cadastro() {
               name="foto"
               placeholder='Foto'
               className='border-2 border-slate-700 rounded p-2'
-              
+
               value={usuario.foto}
               onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
             />
@@ -121,7 +121,7 @@ function Cadastro() {
               name="senha"
               placeholder='Senha'
               className='border-2 border-slate-700 rounded p-2'
-              
+
               value={usuario.senha}
               onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
             />
@@ -139,7 +139,7 @@ function Cadastro() {
               onChange={(e: ChangeEvent<HTMLInputElement>) => handleConfirmarSenha(e)}
             />
           </div>
-          
+
           <div className="flex justify-around w-full gap-8">
             <button
               type='reset'
@@ -153,13 +153,14 @@ function Cadastro() {
               className='rounded text-white bg-indigo-400
                          hover:bg-indigo-900 w-1/2 py-2
                          flex justify-center transition delay-2 cursor-pointer'>
-              {isLoading ? <RotatingLines
-                strokeColor='white'
-                strokeWidth='5'
-                animationDuration='0.75'
-                width='24'
-                visible={true}
-              /> : 
+              {isLoading ?
+                <RotatingLines
+                  strokeColor='white'
+                  strokeWidth='5'
+                  animationDuration='0.75'
+                  width='24'
+                  visible={true}
+                /> :
                 <span>Cadastrar</span>
               }
             </button>
