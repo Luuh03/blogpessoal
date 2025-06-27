@@ -1,0 +1,7 @@
+.popup-content {
+    width: 42rem;
+    border: 1px solid;
+    border-radius: 1rem;
+    padding-bottom: 2rem;
+    background-color: white;
+}
