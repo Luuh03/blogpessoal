@@ -24,7 +24,7 @@ function Cadastro() {
   })
 
   useEffect(() => {
-    if (usuario.id !== null) {
+    if (usuario.id !== undefined) {
       retornar()
     }
   }, [usuario])
